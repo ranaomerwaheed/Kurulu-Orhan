@@ -1,4 +1,3 @@
-jsx
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { EPISODES } from '../data/episodes'
@@ -46,4 +45,5 @@ return (
 </div>
 </main>
 )
+
 }
