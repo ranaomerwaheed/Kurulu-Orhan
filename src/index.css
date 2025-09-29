@@ -1,25 +1,10 @@
-@font-face {
-font-family: 'JameelNoori';
-src: url('/fonts/JameelNooriNastaleeq.ttf') format('truetype');
-font-display: swap;
-}
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-:root { --primary: #4f46e5; }
-
-
-html, body, #root { height: 100%; }
-body { @apply bg-slate-100 text-slate-900; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
-
-
-.dark body { @apply bg-slate-900 text-slate-100; }
-
-
-/* subtitle font fallback uses JameelNoori */
-
-.subtitle-font { font-family: 'JameelNoori', ui-sans-serif, system-ui; }
+@font-face {
+  font-family: 'JameelNooriNastaleeq';
+  src: url('/fonts/JameelNooriNastaleeq.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
