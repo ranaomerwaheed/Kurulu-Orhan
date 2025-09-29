@@ -1,33 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
+function Header() {
+  const [dark, setDark] = useState(false);
 
-export default function Header({ lang, setLang, dark, setDark }) {
-return (
-<header className="w-full shadow-md bg-white dark:bg-slate-900 transition-colors">
-<div className="max-w-6xl mx-auto p-4 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<img src="/images/logo.webp" alt="logo" className="h-12 w-12 object-contain" />
-<h1 className="text-xl font-bold">Kuruluş Orhan</h1>
-</div>
-<div className="flex items-center gap-3">
-<select aria-label="language" value={lang} onChange={(e) => setLang(e.target.value)} className="p-2 rounded-md border">
-<option value="tr">Türkçe</option>
-<option value="en">English</option>
-<option value="ur">اردو</option>
-<option value="ar">العربية</option>
-</select>
+  const toggleDark = () => {
+    document.documentElement.classList.toggle("dark");
+    setDark(!dark);
+  };
 
-
-<button onClick={() => setDark((d) => !d)} className="p-2 rounded-md border">
-{dark ? 'Light' : 'Dark'}
-</button>
-
-
-<Link to="/contact" className="p-2 rounded-md bg-indigo-600 text-white">Contact</Link>
-</div>
-</div>
-</header>
-)
-
+  return (
+    <header className="bg-white dark:bg-gray-800 shadow-md">
+      <div className="container mx-auto flex items-center justify-between p-4">
+        <Link to="/">
+          <img
+            src="https://i.postimg.cc/pTr8393Y/k-FV61ym-F36cn-C1-Ei-JWs-Mvi-QNi-XI.webp"
+            alt="Logo"
+            className="h-12"
+          />
+        </Link>
+        <nav className="flex items-center gap-6">
+          <Link to="/" className="hover:text-orange-600">Home</Link>
+          <Link to="/season1" className="hover:text-orange-600">Season 1</Link>
+          <Link to="/trailer" className="hover:text-orange-600">Trailer</Link>
+          <button
+            onClick={toggleDark}
+            className="bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded"
+          >
+            {dark ? "☀️" : "🌙"}
+          </button>
+        </nav>
+      </div>
+    </header>
+  );
 }
+
+export default Header;
