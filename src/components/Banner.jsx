@@ -1,4 +1,3 @@
-jsx
 import React from 'react'
 
 
@@ -8,4 +7,5 @@ return (
 <img src="/images/banner.png" alt="banner" className="w-full object-cover" />
 </div>
 )
+
 }
