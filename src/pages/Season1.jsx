@@ -1,32 +1,29 @@
 import { useEffect, useState } from "react";
+import EpisodeCard from "../components/EpisodeCard";
 
 function Season1() {
   const [videos, setVideos] = useState([]);
+  const PLAYLIST_ID = "2215601608908478";
 
   useEffect(() => {
-    async function fetchVideos() {
-      const res = await fetch(`/api/fb-videos?album=${import.meta.env.VITE_SEASON1_ALBUM_ID}`);
-      const data = await res.json();
-      setVideos(data);
-    }
+    const fetchVideos = async () => {
+      try {
+        const res = await fetch(`/api/fb-videos?playlistId=${PLAYLIST_ID}`);
+        const data = await res.json();
+        if (data.data) setVideos(data.data);
+      } catch (error) {
+        console.error("Error fetching Season 1 videos:", error);
+      }
+    };
     fetchVideos();
   }, []);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Kuruluş Orhan - Season 1</h2>
-      <div className="grid gap-6">
+    <div className="py-6">
+      <h1 className="text-3xl font-bold mb-4">Kuruluş Orhan - Season 1</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {videos.map((video) => (
-          <div key={video.id} className="p-4 border rounded shadow">
-            <h3 className="font-semibold">{video.title}</h3>
-            <iframe
-              src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.permalink_url)}`}
-              width="100%"
-              height="400"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <EpisodeCard key={video.id} title={video.title} url={video.permalink_url} />
         ))}
       </div>
     </div>
