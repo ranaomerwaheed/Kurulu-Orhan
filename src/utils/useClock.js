@@ -1,4 +1,3 @@
-js
 import { useState, useEffect } from 'react'
 
 
@@ -15,4 +14,5 @@ return () => clearInterval(id)
 
 
 return { t, setT, running, setRunning }
+
 }
