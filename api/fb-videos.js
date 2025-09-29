@@ -1,29 +1,19 @@
-// api/fb-videos.js
+// Example backend proxy for Facebook API
+// (Needs Node.js server or Vercel serverless function setup)
+
 import fetch from "node-fetch";
 
 export default async function handler(req, res) {
-  const { album } = req.query; // playlist/album ID
-  const accessToken = process.env.FB_PAGE_TOKEN;
+  const { playlistId } = req.query;
+  const ACCESS_TOKEN = process.env.FB_TOKEN; // set in Vercel env
 
   try {
-    const fbRes = await fetch(
-      `https://graph.facebook.com/v21.0/${album}/videos?fields=id,title,permalink_url,created_time&access_token=${accessToken}`
+    const response = await fetch(
+      `https://graph.facebook.com/v18.0/${playlistId}/videos?fields=title,permalink_url&access_token=${ACCESS_TOKEN}`
     );
-    const data = await fbRes.json();
-
-    if (data.error) {
-      return res.status(400).json({ error: data.error.message });
-    }
-
-    res.status(200).json(
-      data.data.map((v) => ({
-        id: v.id,
-        title: v.title,
-        permalink_url: v.permalink_url,
-        created_time: v.created_time,
-      }))
-    );
+    const data = await response.json();
+    res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch videos" });
+    res.status(500).json({ error: "Failed to fetch Facebook videos" });
   }
 }
